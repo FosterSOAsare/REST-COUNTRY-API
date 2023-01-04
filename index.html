@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Rest Country</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;900&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="./css/styles.css" />
+		<script src="https://kit.fontawesome.com/f6e3b67683.js" crossorigin="anonymous"></script>
+	</head>
+	<body class="dark">
+		<div class="container">
+			<header>
+				<div class="left_section">
+					<h3>Where in the world?</h3>
+				</div>
+				<div class="right_section">
+					<i class="fa-regular fa-moon"></i>
+					<p>Dark Mode</p>
+				</div>
+			</header>
+			<div class="main">
+				<!-- The Details Page -->
+				<div class="details">
+					<div class="top_section">
+						<div class="back">
+							<i class="fa-solid fa-arrow-left-long"></i>
+							<p>Back</p>
+						</div>
+					</div>
+					<div class="bottom_section">
+						<!-- Contains Image -->
+						<div class="left_section"></div>
+						<!-- Contains country information -->
+						<div class="right_section"></div>
+					</div>
+				</div>
+				<!-- The StartUp Page (HomePage) -->
+				<div class="home">
+					<div class="functionalities">
+						<div class="search">
+							<i class="fa-solid fa-magnifying-glass"></i>
+							<input type="text" placeholder="Search for a country" />
+						</div>
+						<div class="search_options">
+							<ul></ul>
+						</div>
+						<div class="filter">
+							<p>Filter By Region</p>
+							<i class="fa-solid fa-angle-down"></i>
+						</div>
+						<div class="filter_options">
+							<ul>
+								<li>Africa</li>
+								<li>America</li>
+								<li>Asia</li>
+								<li>Europe</li>
+								<li>Oceania</li>
+							</ul>
+						</div>
+					</div>
+					<div class="output"></div>
+				</div>
+			</div>
+		</div>
+		<script src="./js/app.js" type="module"></script>
+	</body>
+</html>
