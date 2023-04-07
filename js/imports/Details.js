@@ -1,8 +1,11 @@
+import Loading from "./loading.js";
+let loading = new Loading();
 export class DetailsPage {
 	constructor() {
 		this.cards = document.querySelectorAll(".card");
 		this.details = document.querySelector(".details");
 		this.home = document.querySelector(".home");
+		this.bottom = document.querySelector(".details .bottom_section");
 		this.backFunctionality();
 	}
 
@@ -10,24 +13,34 @@ export class DetailsPage {
 		this.countries = data;
 	}
 	createDetailsPage(country) {
-		let flag__container = document.querySelector(".details .bottom_section .left_section");
-		let info__container = document.querySelector(".details .bottom_section .right_section");
-		this.createLeftPart(flag__container, country.flags.png);
-		this.createRightPart(info__container, country);
+		this.bottom.innerHTML = "";
+		loading.createLoading(this.bottom);
 		this.details.style.display = "block";
+		setTimeout(() => {
+			loading.clearLoading(this.bottom);
+			let flag__container = document.querySelector(".details .bottom_section .left_section");
+			let info__container = document.querySelector(".details .bottom_section .right_section");
+			this.createLeftPart(country.flags.png);
+			this.createRightPart(country);
+		}, 500);
 	}
 
-	createLeftPart(parent, img_src) {
+	createLeftPart(img_src) {
+		let left_section = document.createElement("div");
+		left_section.classList.add("left_section");
 		let flag = document.createElement("img");
-		let prevImg = parent.querySelector("img");
-		if (prevImg) parent.removeChild(prevImg);
 		flag.src = img_src;
-		parent.append(flag);
+		left_section.append(flag);
+		this.bottom.appendChild(left_section);
 	}
 
-	createRightPart(parent, data) {
+	createRightPart(data) {
+		let right = document.createElement("div");
+		right.classList.add("right_section");
+
 		let h3 = document.createElement("h3");
-		h3.textContent = this.trimText(data.name, 25);
+		// h3.textContent = this.trimText(data.name, 25);
+		h3.textContent = data.name;
 
 		let info = document.createElement("div");
 		info.classList.add("info");
@@ -42,24 +55,12 @@ export class DetailsPage {
 		this.createParagraph(div2, "Currencies:", data.currencies);
 		this.createParagraph(div2, "Languages:", data.languages);
 
-		let prevInfo = parent.querySelector(".info");
-		if (prevInfo) {
-			parent.removeChild(prevInfo);
-		}
-
 		info.append(div1, div2);
-		let prevBorders = parent.querySelector(".border_countries");
-		if (prevBorders) {
-			parent.removeChild(prevBorders);
-		}
 
-		let prevH3 = parent.querySelector("h3");
-		if (prevH3) {
-			parent.removeChild(prevH3);
-		}
 		let borders = this.createBorderCountries(data.borders);
 
-		parent.append(h3, info, borders);
+		right.append(h3, info, borders);
+		this.bottom.appendChild(right);
 	}
 
 	createParagraph(parent, p_content, span_value) {
@@ -87,21 +88,30 @@ export class DetailsPage {
 		let p = document.createElement("p");
 		p.textContent = "Border Countries:";
 
-		let borders = document.createElement("div");
-		borders.classList.add("borders");
-
-		data &&
+		if (data) {
+			let borders = document.createElement("div");
+			borders.classList.add("borders");
 			data.forEach((borderCountry) => {
 				this.createBorderCountry(borders, borderCountry);
 			});
-		div.append(p, borders);
+			div.append(p, borders);
+		}
+
+		if (!data) {
+			let no_border = document.createElement("div");
+			no_border.classList.add("no_border");
+			no_border.innerText = "Country has no borders";
+			div.append(p, no_border);
+		}
+
 		return div;
 	}
 
 	createBorderCountry(parent, code) {
 		let div = document.createElement("div");
 		let country = this.countries.find((e) => e.alpha3Code == code);
-		div.textContent = country.name;
+		div.classList.add("border-country");
+		div.textContent = this.trimText(country.name, 15);
 
 		div.addEventListener("click", () => {
 			this.createDetailsPage(this.countries.find((e) => e.name == country.name));

@@ -1,9 +1,12 @@
 import { DetailsPage } from "./Details.js";
+import Loading from "./loading.js";
 let detailsPage = new DetailsPage();
+let loading = new Loading();
 export class Countries {
 	countries = [];
 	constructor() {
-		this.output = document.querySelector(".output");
+		this.output_container = document.querySelector(".output__items");
+		this.output = document.querySelector(".output__items .output");
 	}
 
 	setCountries(data) {
@@ -53,6 +56,7 @@ export class Countries {
 
 	// This is used as the start up
 	createStartUpCountryCards() {
+		this.output.innerHTML = "";
 		let arr = [];
 		let countries = this.getCountries();
 		// Limit to random 30 countries
@@ -65,6 +69,7 @@ export class Countries {
 
 	clearExistingCards() {
 		// Remove all pre-existing cards in the output
+		this.output.innerHTML = "";
 		let card = document.querySelectorAll(".card");
 		card.forEach((e) => {
 			this.output.removeChild(e);
@@ -100,15 +105,17 @@ export class Countries {
 
 	createSearchResult(countryName) {
 		this.clearExistingCards();
+		this.setMainPageLoad();
 		// Setup loading
 		setTimeout(() => {
 			let country = this.countries.find((e) => e.name.toLowerCase() === countryName.toLowerCase());
+			this.removeMainPageLoad();
 			if (!country) {
 				this.createNotFound();
 				return;
 			}
 			this.createCountryCard(country.flag, country.name, country.population, country.region, country.capital);
-		}, 2000);
+		}, 500);
 	}
 
 	createNotFound() {
@@ -116,5 +123,11 @@ export class Countries {
 		text.classList.add("text");
 		text.textContent = "No country matches your search";
 		this.output.appendChild(text);
+	}
+	setMainPageLoad() {
+		loading.createLoading(this.output_container);
+	}
+	removeMainPageLoad() {
+		loading.clearLoading(this.output_container);
 	}
 }

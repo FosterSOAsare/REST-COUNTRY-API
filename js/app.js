@@ -1,6 +1,11 @@
 import { Countries } from "./imports/Countries.js";
 let countriesData = new Countries();
 
+// Set loading on start up
+(function () {
+	countriesData.setMainPageLoad();
+})();
+
 function toggleTheme(theme) {
 	let moon = document.querySelector("header i");
 	if (theme === "light") {
@@ -37,11 +42,10 @@ if (localStorage.getItem("theme") == null) {
 (async () => {
 	let res = await fetch("https://restcountries.com/v2/all");
 	let response = await res.json();
+
 	countriesData.setCountries(response);
-	// Put in loading here
-	setTimeout(() => {
-		countriesData.createStartUpCountryCards();
-	}, 2000);
+	countriesData.removeMainPageLoad();
+	countriesData.createStartUpCountryCards();
 })();
 
 // Toggle The Arrow on the filter div
@@ -61,6 +65,7 @@ function toggleArrow(display) {
 	let filter_options = document.querySelector(".filter_options");
 	let filter_list_items = document.querySelectorAll(".filter_options ul li");
 	let filter_div = document.querySelector(".filter");
+	// Toggle filter options
 	filter_div.addEventListener("click", () => {
 		let style = getComputedStyle(filter_options);
 		// Displaying filter options
@@ -76,16 +81,19 @@ function toggleArrow(display) {
 				countriesData.clearExistingCards();
 				filter_options.style.display = "none";
 				toggleArrow("none");
-				// Setup Loading Here
+
+				// Set loading on main page and remove loading after filtering
+				countriesData.setMainPageLoad();
 				setTimeout(() => {
 					countriesData.filterCards(e.textContent);
-				}, 2000);
+					countriesData.removeMainPageLoad();
+				}, 500);
 			});
 		});
 	}
 })();
 
-// Search functionality
+// Create a country suggestion based on the input field value
 const createSuggestedCountry = (name) => {
 	let search_options_ul = document.querySelector(".search_options ul");
 	let country = document.createElement("li");
@@ -112,6 +120,7 @@ const clearExistingSuggestedCountries = () => {
 		search_options_ul.removeChild(suggestedCountry);
 	});
 };
+
 (function () {
 	let search_input = document.querySelector(".search input");
 	let search_icon = document.querySelector(".search i");
