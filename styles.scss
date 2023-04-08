@@ -253,6 +253,9 @@ body {
 									text-align: center;
 								}
 							}
+							.no_border {
+								margin-left: 3px;
+							}
 						}
 					}
 				}
@@ -315,9 +318,6 @@ body {
 								width: 75%;
 								display: grid;
 								grid-template-columns: repeat(2, 1fr);
-							}
-							.no_border {
-								margin-left: 3px;
 							}
 						}
 					}

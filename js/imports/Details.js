@@ -45,15 +45,15 @@ export class DetailsPage {
 		let info = document.createElement("div");
 		info.classList.add("info");
 		let div1 = document.createElement("div");
-		this.createParagraph(div1, "Native Name:", data.nativeName);
-		this.createParagraph(div1, "Population:", data.population);
-		this.createParagraph(div1, "Region", data.region);
-		this.createParagraph(div1, "Sub Region:", data.subregion);
-		this.createParagraph(div1, "Capital:", data.capital);
+		this.createParagraph(div1, "Native Name: ", data.nativeName);
+		this.createParagraph(div1, "Population: ", data.population);
+		this.createParagraph(div1, "Region: ", data.region);
+		this.createParagraph(div1, "Sub Region: ", data.subregion);
+		this.createParagraph(div1, "Capital: ", data.capital);
 		let div2 = document.createElement("div");
-		this.createParagraph(div2, "Top Level Domain:", data.topLevelDomain[0]);
-		this.createParagraph(div2, "Currencies:", data.currencies);
-		this.createParagraph(div2, "Languages:", data.languages);
+		this.createParagraph(div2, "Top Level Domain: ", data.topLevelDomain[0]);
+		this.createParagraph(div2, "Currencies: ", this.createStringFromArray(data.currencies, "name"));
+		this.createParagraph(div2, "Languages: ", this.createStringFromArray(data.languages, "name"));
 
 		info.append(div1, div2);
 
@@ -128,6 +128,16 @@ export class DetailsPage {
 			this.details.style.display = "none";
 			this.home.style.display = "block";
 		});
+	}
+	createStringFromArray(array, property) {
+		let string = "";
+		array.forEach((e, index, array) => {
+			string += e[property];
+			if (index !== array.length - 1) {
+				string += ", ";
+			}
+		});
+		return string;
 	}
 	// The back functionality
 }

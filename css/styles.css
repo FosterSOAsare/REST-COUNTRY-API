@@ -263,6 +263,9 @@ body {
     justify-content: center;
     text-align: center;
   }
+  body .main .details .bottom_section .right_section .border_countries .no_border {
+    margin-left: 3px;
+  }
   body .main .loading__container {
     width: 100%;
     height: auto;
@@ -317,9 +320,6 @@ body {
     width: 75%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-  }
-  .container .main .details .bottom_section .right_section .border_countries .no_border {
-    margin-left: 3px;
   }
   .container .main .home .functionalities {
     display: flex;
