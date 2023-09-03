@@ -65,10 +65,12 @@ function toggleArrow(display) {
 	let filter_options = document.querySelector(".filter_options");
 	let filter_list_items = document.querySelectorAll(".filter_options ul li");
 	let filter_div = document.querySelector(".filter");
+
 	// Toggle filter options
 	filter_div.addEventListener("click", () => {
 		let style = getComputedStyle(filter_options);
 		// Displaying filter options
+		// if(search_options?.style.display === 'block' ) search_options?.style.display = "none";
 		filter_options.style.display = style.display === "none" ? "block" : "none";
 		toggleArrow(style.display);
 	});
@@ -121,12 +123,16 @@ const clearExistingSuggestedCountries = () => {
 	});
 };
 
+// The search functionality
 (function () {
 	let search_input = document.querySelector(".search input");
 	let search_icon = document.querySelector(".search i");
 	let search_options = document.querySelector(".search_options");
+	let filter_options = document.querySelector(".filter_options");
 	search_input.addEventListener("keyup", (e) => {
 		let value = search_input.value;
+		// Hide filter options if it is block
+		if (filter_options.style.display === "block") filter_options.style.display = "none";
 		// If key is enter (Submit);
 		if (e.key == "Enter") {
 			search_options.style.display = "none";

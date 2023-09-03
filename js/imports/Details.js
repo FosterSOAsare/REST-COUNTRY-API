@@ -91,7 +91,7 @@ export class DetailsPage {
 		if (data) {
 			let borders = document.createElement("div");
 			borders.classList.add("borders");
-			data.forEach((borderCountry) => {
+			data.filter((item, i) => i < 4).forEach((borderCountry) => {
 				this.createBorderCountry(borders, borderCountry);
 			});
 			div.append(p, borders);

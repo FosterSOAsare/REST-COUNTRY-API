@@ -31,7 +31,6 @@ body {
 				height: 60px;
 				@include display(flex, center, space-between);
 				padding: 0 20px;
-				background-color: red;
 				.right_section {
 					width: 100px;
 					height: 50%;
@@ -49,7 +48,7 @@ body {
 		.main {
 			width: 100%;
 			height: 92%;
-			padding: 40px 50px;
+			padding: 20px;
 			position: relative;
 			.home {
 				width: 100%;
@@ -95,26 +94,28 @@ body {
 					.search_options,
 					.filter_options {
 						width: 55%;
-						min-height: 40px;
+						min-height: 30px;
 						position: absolute;
-						padding: 15px;
+						// padding: 15px;
 						top: 120%;
+						padding: 0;
 						border-radius: 5px;
 						display: none;
-
+						z-index: 3;
 						ul {
 							list-style: none;
 							width: 100%;
 							height: 100%;
 							li {
-								height: 20px;
+								height: 30px;
 								width: 100%;
-								margin-bottom: 10px;
-								border-radius: 5px;
-								padding: 0 10px;
+								padding: 0 20px;
 								font-weight: 600;
 								font-size: 14px;
 								@include display(flex, center, flex-start);
+								&:hover {
+									cursor: pointer;
+								}
 							}
 						}
 					}
@@ -136,6 +137,11 @@ body {
 						height: 280px;
 						border-radius: 5px;
 						overflow: hidden;
+						transition: all 0.15s ease-in;
+						&:hover {
+							cursor: pointer;
+							scale: 1.05;
+						}
 
 						.card_top {
 							width: 100%;
@@ -168,8 +174,7 @@ body {
 			.details {
 				height: 100vh;
 				width: 100%;
-				padding: 0 50px;
-				padding: 50px;
+				padding: 50px 20px;
 				z-index: 2;
 				position: fixed;
 				left: 0;
@@ -187,6 +192,9 @@ body {
 						font-weight: 600;
 						border-radius: 5px;
 						padding: 0 25px;
+						&:hover {
+							cursor: pointer;
+						}
 						i {
 							margin-right: 10px;
 						}
@@ -198,6 +206,7 @@ body {
 					margin-top: 70px;
 					@include display(flex, center, space-between);
 					flex-direction: column;
+
 					.left_section {
 						width: 100%;
 						height: 100%;
@@ -209,7 +218,7 @@ body {
 					.right_section {
 						width: 100%;
 						height: 100%;
-						padding: 50px 20px;
+						padding: 30px 0px;
 						.info {
 							width: 100%;
 							height: auto;
@@ -235,22 +244,30 @@ body {
 							margin-top: 30px;
 							font-size: 14px;
 							font-weight: 600;
-							@include display(flex, center, flex-start);
+							width: 100%;
+							@include display(flex, flex-start, flex-start);
+							flex-direction: column;
 							.borders {
-								margin-left: 10px;
-								width: 75%;
+								width: 100%;
 								height: auto;
-								display: block;
+								margin-top: 10px;
+								display: grid;
+								grid-template-columns: 1fr 1fr;
+								gap: 0px 5px;
 								.border-country {
-									min-height: 30px;
+									min-height: 40px;
 									max-height: 50px;
 									max-width: 400px;
 									border-radius: 5px;
 									font-weight: 300;
-									margin-right: 5px;
+									padding: 0;
 									margin-bottom: 5px;
 									@include display(flex, center, center);
 									text-align: center;
+									&:hover {
+										opacity: 0.7;
+										cursor: pointer;
+									}
 								}
 							}
 							.no_border {
@@ -298,8 +315,7 @@ body {
 				}
 				.bottom_section {
 					flex-direction: column;
-
-					height: 350px;
+					height: auto !important;
 					.left_section {
 						width: 80%;
 					}
@@ -315,7 +331,7 @@ body {
 						}
 						.border_countries {
 							.borders {
-								width: 75%;
+								width: 100% !important;
 								display: grid;
 								grid-template-columns: repeat(2, 1fr);
 							}
@@ -433,6 +449,7 @@ body {
 
 		.main {
 			.details {
+				padding: 50px 120px;
 				.top_section {
 					.back {
 						width: 10%;
@@ -503,6 +520,10 @@ body {
 			.top_section {
 				.back {
 					box-shadow: 2px 3px 5px $lightInput;
+					&:hover {
+						background-color: $darkBackground;
+						color: $darkText;
+					}
 				}
 			}
 			.bottom_section {
@@ -536,6 +557,10 @@ body {
 				.filter_options {
 					background-color: $lightElements;
 					box-shadow: 2px 2px 5px $lightInput;
+					li:hover {
+						background-color: $darkBackground;
+						color: $darkText;
+					}
 				}
 			}
 			.output {
@@ -574,6 +599,10 @@ body {
 				.back {
 					box-shadow: none;
 					background-color: $darkElements;
+					&:hover {
+						background-color: $lightBackground;
+						color: $lightText;
+					}
 				}
 			}
 			.bottom_section {
@@ -610,6 +639,10 @@ body {
 					background-color: $darkElements;
 					box-shadow: none;
 					color: $darkText;
+					li:hover {
+						background-color: #ffffff !important;
+						color: $lightText;
+					}
 				}
 			}
 			.output {
